@@ -44,4 +44,17 @@ glass |>
   dplyr::filter(Fe < 0.2, Type_of_glass %in% c("tableware", "headlamp"))
 ```
 ## Yeast Data
-
+Reading in Yeast data.
+```{r}
+yeast <- read_table("https://www4.stat.ncsu.edu/~online/datasets/yeast.data", col_names = c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class"))
+yeast
+```
+Removing seq_name and nuc columns. Adding columns corresponding to the mean and median of each numeric variable)
+```{r}
+yeast |> 
+  select(mcg, gvh, alm, mit, erl, pox, vac, class) |>
+  mutate(across(c(mcg, gvh, alm, mit, erl, pox, vac), mean, .names = "mean_{.col}")) |>
+  mutate(across(c(mcg, gvh, alm, mit, erl, pox, vac), median, .names = "median_{.col}")) |>
+  group_by(class)
+```
+# Task 2: Combining Excel and Delimited Data
