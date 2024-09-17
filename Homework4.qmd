@@ -1,0 +1,35 @@
+# Task 1: Conceptual Questions
+1. ../MyData.csv
+2. 
+3. Git is a version control software and Github is an online hosting service for Git-based projects.
+4. A tibble is a special version of a data frame. The printing method for a tibble is different than a data frame. The printing is more useful and doesn't clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns.
+5. 
+```{r}
+iris |>
+  as.tibble() |>
+  select(starts_with("Petal", Species))
+```
+
+
+
+```{r}
+library("tidyverse")
+```
+
+# Task 2 Reading Delimited Data
+```{r}
+glass <- read_csv("https://www4.stat.ncsu.edu/~online/datasets/glass.data", col_names = c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
+glass
+```
+```{r}
+glass |>
+  mutate(Type_of_glass = ifelse(Type_of_glass == 1, "building_windows_float_processed",Type_of_glass),
+      ifelse(Type_of_glass == 2,"building_windows_non_float_processed",Type_of_glass),
+      ifelse(Type_of_glass == 3,"vehicle_windows_float_processed",Type_of_glass),
+      ifelse(Type_of_glass == 4, "vehicle_windows_non_float_processed", Type_of_glass),
+      ifelse(Type_of_glass == 5,"container",Type_of_glass),
+      ifelse(Type_of_glass == 6,"tableware",Type_of_glass),
+      ifelse(Type_of_glass == 7,"headlamp",Type_of_glass)) |>
+  dplyr::filter(Fe < 0.2, Type_of_glass %in% c("tableware", "headlamp"))
+```
+
