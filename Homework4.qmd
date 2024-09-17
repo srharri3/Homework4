@@ -58,3 +58,44 @@ yeast |>
   group_by(class)
 ```
 # Task 2: Combining Excel and Delimited Data
+```{r}
+library(readxl)
+```
+Read in white wine excel sheet.
+```{r}
+white_wine <- read_excel("white-wine.xlsx",
+                sheet = excel_sheets("white-wine.xlsx")[1])
+white_wine
+```
+
+
+```{r}
+white_wine_variables <- read_excel("white-wine.xlsx",
+                sheet = excel_sheets("white-wine.xlsx")[2])
+white_wine_variables
+```
+Overwriting current column names with second sheet.
+```{r}
+new_names <- white_wine_variables[[1]]
+colnames(white_wine) <- new_names
+white_wine
+```
+ 
+Adding column with "white" to indicate these are white wines.
+```{r}
+white_wine$type <- "white"
+white_wine
+```
+
+```{r}
+red_wine <- read_csv2("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv", col_names = FALSE)
+red_wine |>
+  mutate(
+    'volatile acidity' = as.numeric('volatile acidity'),
+    'citric acid' = as.numeric('citric acid'),
+    'chlorides' = as.numeric('chlorides'),
+    'density' = as.numeric('density'),
+    'sulphates' = as.numeric('sulphates'))
+colnames(red_wine) <- new_names
+red_wine$type <- "red"
+```
