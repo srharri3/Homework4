@@ -4,11 +4,9 @@
 3. Git is a version control software and Github is an online hosting service for Git-based projects.
 4. A tibble is a special version of a data frame. The printing method for a tibble is different than a data frame. The printing is more useful and doesn't clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns.
 5. 
-```{r}
 iris |>
   as.tibble() |>
   select(starts_with("Petal", Species))
-```
 
 
 
@@ -84,18 +82,40 @@ white_wine
 Adding column with "white" to indicate these are white wines.
 ```{r}
 white_wine$type <- "white"
-white_wine
 ```
 
 ```{r}
-red_wine <- read_csv2("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv", col_names = FALSE)
+white_wine
+```
+
+
+
+```{r}
+red_wine <- read_csv2("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv", col_names = TRUE)
+colnames(red_wine) <- new_names
 red_wine |>
   mutate(
-    'volatile acidity' = as.numeric('volatile acidity'),
-    'citric acid' = as.numeric('citric acid'),
-    'chlorides' = as.numeric('chlorides'),
-    'density' = as.numeric('density'),
-    'sulphates' = as.numeric('sulphates'))
-colnames(red_wine) <- new_names
+    fixed_acidity = as.double(fixed_acidity),
+    volatile_acidity = as.double(volatile_acidity),
+    citric_acid = as.double(citric_acid),
+    residual_sugar = as.double(residual_sugar),
+    chlorides = as.double(chlorides),
+    free_sulfur_dioxide = as.double(free_sulfur_dioxide),
+    total_sulfur_dioxide = as.double(total_sulfur_dioxide),
+    density = as.double(density),
+    pH = as.double(pH),
+    sulphates = as.double(sulphates),
+    alcohol = as.double(alcohol),
+    quality = as.double(quality)
+  )
+red_wine
+```
+```{r}
+parsing_issues <- problems(red_wine)
+print(parsing_issues)
+```
+
+```{r}
 red_wine$type <- "red"
 ```
+
