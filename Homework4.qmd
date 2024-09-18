@@ -96,17 +96,11 @@ white_wine_variables <- read_excel("white-wine.xlsx",
 white_wine_variables
 ```
 
-Overwriting current column names with second sheet.
+Overwriting current column names with second sheet. Adding column with "white" to indicate these are white wines.
 
 ```{r}
 new_names <- white_wine_variables[[1]]
 colnames(white_wine) <- new_names
-white_wine
-```
-
-Adding column with "white" to indicate these are white wines.
-
-```{r}
 white_wine$type <- "white"
 white_wine
 ```
