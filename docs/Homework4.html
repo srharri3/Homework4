@@ -57,24 +57,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Homework4_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/quarto.js"></script>
-<script src="Homework4_files/libs/quarto-html/popper.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Homework4_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Homework4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Homework4_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Homework4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Homework4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 
@@ -83,11 +120,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-1-conceptual-questions" class="level1">
 <h1>Task 1: Conceptual Questions</h1>
 <ol type="1">
-<li>../MyData.csv</li>
-<li></li>
-<li>Git is a version control software and Github is an online hosting service for Git-based projects.</li>
-<li>A tibble is a special version of a data frame. The printing method for a tibble is different than a data frame. The printing is more useful and doesn’t clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns.</li>
-<li>iris |&gt; as.tibble() |&gt; select(starts_with(“Petal”, Species))</li>
+<li><p>../MyData.csv</p></li>
+<li><p>R projects help keep files and analysis separate, while all being in one general location. You can divide work into multiple sections easily, and this allows for easier collaboration.</p></li>
+<li><p>Git is a version control software and Github is an online hosting service for Git-based projects.</p></li>
+<li><p>A tibble is a special version of a data frame with a printing method that is different than a data frame. The printing is more useful and doesn’t clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns making it easier to look at.</p></li>
+<li><p>iris_chain |&gt;</p>
+<p>as.tibble(iris) |&gt;</p>
+<p>select(starts_with(“Petal”, Species). |&gt;</p>
+<p>filter(Petal.Length &lt; 1.55) |&gt;</p>
+<p>arrange(Species)</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -250,7 +291,7 @@ cols(
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Read in white wine excel sheet.</p>
+<p>Read in white wine excel sheet #1.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>white_wine <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"white-wine.xlsx"</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">sheet =</span> <span class="fu">excel_sheets</span>(<span class="st">"white-wine.xlsx"</span>)[<span class="dv">1</span>])</span>
@@ -275,6 +316,7 @@ cols(
 #   alcohol &lt;dbl&gt;, quality &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<p>Reading in variables from white wine excel sheet #2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>white_wine_variables <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"white-wine.xlsx"</span>,</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">sheet =</span> <span class="fu">excel_sheets</span>(<span class="st">"white-wine.xlsx"</span>)[<span class="dv">2</span>])</span>
@@ -345,6 +387,7 @@ cols(
 #   type &lt;chr&gt;</code></pre>
 </div>
 </div>
+<p>Reading in red wine data set, which is delimited by semicolons. Replacing column names with new_names and adding an extra column with the type of wine (red).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>red_wine <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -379,6 +422,7 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 #   type &lt;chr&gt;</code></pre>
 </div>
 </div>
+<p>Combining the two data sets into one.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>wine_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(white_wine, red_wine)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>wine_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -402,6 +446,7 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 #   type &lt;chr&gt;</code></pre>
 </div>
 </div>
+<p>Starting a chain to filter the data, select certain variables, and add mean and standard deviation of alcohol variable for every quality group.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>wine_data <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(quality <span class="sc">&gt;</span> <span class="fl">6.5</span> <span class="sc">&amp;</span> alcohol <span class="sc">&lt;</span> <span class="dv">132</span>) <span class="sc">|&gt;</span></span>
@@ -418,7 +463,7 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 2       8         94.1       42.8
 3       9        122.        10.1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wine_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>wine_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,497 × 13
    fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
@@ -439,10 +484,11 @@ dbl (12): fixed acidity, volatile acidity, citric acid, residual sugar, chlo...
 #   type &lt;chr&gt;</code></pre>
 </div>
 </div>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
