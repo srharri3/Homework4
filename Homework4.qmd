@@ -1,27 +1,40 @@
 # Task 1: Conceptual Questions
-1. ../MyData.csv
-2. 
-3. Git is a version control software and Github is an online hosting service for Git-based projects.
-4. A tibble is a special version of a data frame. The printing method for a tibble is different than a data frame. The printing is more useful and doesn't clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns.
-5. 
-iris |>
-  as.tibble() |>
-  select(starts_with("Petal", Species))
 
+1.  ../MyData.csv
 
+2.  R projects help keep files and analysis separate, while all being in one general location. You can divide work into multiple sections easily, and this allows for easier collaboration.
+
+3.  Git is a version control software and Github is an online hosting service for Git-based projects.
+
+4.  A tibble is a special version of a data frame with a printing method that is different than a data frame. The printing is more useful and doesn't clog output space. From this we get information on the number of observations, the columns, and we only see the first few rows and columns making it easier to look at.
+
+5.  iris_chain \|\>
+
+    as.tibble(iris) \|\>
+
+    select(starts_with("Petal", Species). \|\>
+
+    filter(Petal.Length \< 1.55) \|\>
+
+    arrange(Species)
 
 ```{r}
 library("tidyverse")
 ```
 
 # Task 2 Reading Delimited Data
+
 ## Glass Data
+
 Reading data into R from URL and printing out the tibble.
+
 ```{r}
 glass <- read_csv("https://www4.stat.ncsu.edu/~online/datasets/glass.data", col_names = c("Id","RI","Na","Mg","Al","Si","K","Ca","Ba","Fe","Type_of_glass"))
 glass
 ```
+
 Starting a chain to overwrite Type_of_glass using mutate. Continuing the chain to only keep certain observations.
+
 ```{r}
 glass |>
   mutate(Type_of_glass = ifelse(
@@ -41,13 +54,18 @@ glass |>
         as.character(Type_of_glass))))))))) |>
   dplyr::filter(Fe < 0.2, Type_of_glass %in% c("tableware", "headlamp"))
 ```
+
 ## Yeast Data
+
 Reading in Yeast data.
+
 ```{r}
 yeast <- read_table("https://www4.stat.ncsu.edu/~online/datasets/yeast.data", col_names = c("seq_name","mcg","gvh","alm","mit","erl","pox","vac","nuc","class"))
 yeast
 ```
+
 Removing seq_name and nuc columns. Adding columns corresponding to the mean and median of each numeric variable)
+
 ```{r}
 yeast |> 
   select(mcg, gvh, alm, mit, erl, pox, vac, class) |>
@@ -55,40 +73,45 @@ yeast |>
   mutate(across(c(mcg, gvh, alm, mit, erl, pox, vac), median, .names = "median_{.col}")) |>
   group_by(class)
 ```
+
 # Task 2: Combining Excel and Delimited Data
+
 ```{r}
 library(readxl)
 ```
-Read in white wine excel sheet.
+
+Read in white wine excel sheet #1.
+
 ```{r}
 white_wine <- read_excel("white-wine.xlsx",
                 sheet = excel_sheets("white-wine.xlsx")[1])
 white_wine
 ```
 
+Reading in variables from white wine excel sheet #2.
 
 ```{r}
 white_wine_variables <- read_excel("white-wine.xlsx",
                 sheet = excel_sheets("white-wine.xlsx")[2])
 white_wine_variables
 ```
+
 Overwriting current column names with second sheet.
+
 ```{r}
 new_names <- white_wine_variables[[1]]
 colnames(white_wine) <- new_names
 white_wine
 ```
- 
+
 Adding column with "white" to indicate these are white wines.
-```{r}
-white_wine$type <- "white"
-```
 
 ```{r}
+white_wine$type <- "white"
 white_wine
 ```
 
-
+Reading in red wine data set, which is delimited by semicolons. Replacing column names with new_names and adding an extra column with the type of wine (red).
 
 ```{r}
 red_wine <- read_delim("https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv", delim = ";", col_names = TRUE)
@@ -97,18 +120,22 @@ red_wine$type <- "red"
 red_wine
 ```
 
+Combining the two data sets into one.
+
 ```{r}
 wine_data <- dplyr::bind_rows(white_wine, red_wine)
 wine_data
 ```
+
+Starting a chain to filter the data, select certain variables, and add mean and standard deviation of alcohol variable for every quality group.
+
 ```{r}
 wine_data |>
-  filter(quality > 6.5, alcohol < 132) |>
+  dplyr::filter(quality > 6.5 & alcohol < 132) |>
   arrange(desc(quality)) |>
   select(fixed_acidity, volatile_acidity, citric_acid, alcohol, type, quality) |>
   group_by(quality) |>
  summarize(alcohol_mean = mean(alcohol, na.rm = TRUE),
-        alcohol_sd = sd(alcohol, na.rm = TRUE))
-print(wine_data)
+           alcohol_sd = sd(alcohol, na.rm = TRUE))
+wine_data
 ```
-
